@@ -9,11 +9,13 @@ from moexalgo import Market, Ticker
 import numpy as np
 from Indicator import Indicator
 
+
 class OneDaySystem(TradeSystem):
 
-    def __init__(self, data: MarketData, money: float, lot_size: int):
+    def __init__(self, data: MarketData, money: float, lot_size: int, period: int):
         self.lot_size = lot_size
         self.money = money
+        self.period = period
         self.set_market_data(data)
         self.add_data()
 
@@ -94,7 +96,13 @@ class OneDaySystem(TradeSystem):
 
     def add_data(self):
         indicator = Indicator()
-        self.df = indicator.simple_moving_average(df=self.df, price_col="close", period=5)
-        self.df = indicator.crossover_indicator(self.df, sma_col="SMA_5")
+        self.df = indicator.simple_moving_average(df=self.df, price_col="close", period=self.period)
+        self.df = indicator.crossover_indicator(self.df, sma_col="SMA_"+str(self.period))
         self.df = self.add_profit_on_buy_indicator(self.df, "Crossover")
         self.df = self.add_buy_signal(self.df, "Crossover")
+
+    def get_money(self):
+        return self.money
+
+    def set_money(self, money):
+        self.money = money

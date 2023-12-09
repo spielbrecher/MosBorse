@@ -21,7 +21,7 @@ class MarketData:
 
     def get_stocks_list(self):
         df = pd.DataFrame(self.stocks.tradestats(date=self.date_end))
-        return df[['secid']].unique()
+        return df['secid'].unique()
 
     def get_tradestats(self):
         return pd.DataFrame(self.stocks.tradestats(date=self.date_end))
