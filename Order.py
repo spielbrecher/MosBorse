@@ -1,14 +1,11 @@
-from OrderType import ORDER_TYPE
-
 class Order:
 
-    id: int
-    type: ORDER_TYPE
-    instrument: str
-    lots: float
-    datetime: str
-    isExecuted: bool
-
     def __init__(self):
-        pass
+        self.id: int
+        self.type: str
+        self.instrument: str
+        self.price: float
+        self.lots: float
+        self.datetime: str
+        self.isExecuted: bool
 

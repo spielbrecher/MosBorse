@@ -6,6 +6,7 @@ from pandastable import Table, TableModel, config
 import pandas as pd
 
 from OneDaySystem import OneDaySystem
+from Tester import Tester
 
 
 class App(tk.Tk):
@@ -77,12 +78,12 @@ class App(tk.Tk):
 def test_one_day():
     # One day system
     market = MarketData(date_begin='2020-01-10', date_end='2023-11-24')
+    market.load_asset_data("SBER")
     system = OneDaySystem(data=market, money=10000, lot_size=10)  # Задаем параметры системы
-    action = system.get_action('10:00:00')
-    if action!=None:
-        print(f'{action.id} {action.instrument} {action.datetime} {action.type} {action.lots}')
-    else:
-        print("None")
+    tester = Tester(market, system)
+    tester.test(10)
+    statistics = tester.get_statistics()
+    print(statistics)
 
 def test():
     test_one_day()

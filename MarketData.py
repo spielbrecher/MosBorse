@@ -16,6 +16,9 @@ class MarketData:
         # Все акции
         self.candles = self.asset.candles(date=self.date_begin, till_date=self.date_end, period='D')
 
+    def get_candles(self):
+        return self.candles
+
     def get_stocks_list(self):
         df = pd.DataFrame(self.stocks.tradestats(date=self.date_end))
         return df[['secid']].unique()
