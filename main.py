@@ -185,7 +185,7 @@ def test_one_day():
     market = MarketData(date_begin='2020-01-10', date_end='2023-11-24')
     market.load_asset_data("SBER")
     system = OneDaySystem(data=market, money=10000, lot_size=10, period=5)  # Задаем параметры системы
-    tester = Tester(market, system, 1000)
+    tester = Tester(market, system, 10000)
     money_list = tester.test(10)
     statistics = tester.get_statistics()
     return statistics, money_list

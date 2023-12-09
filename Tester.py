@@ -47,12 +47,12 @@ class Tester:
             order: Order = self.trade_system.get_action('10:00:00')
             if order:
                 self.orders.append(order)
-                buy_price = order.price
+                buy_price = order.price * order.lots
                 orders_count += 1
             order: Order = self.trade_system.get_action('23:59:59')
             if order:
                 self.orders.append(order)
-                sell_price = order.price
+                sell_price = order.price * order.lots
                 trade_profit = sell_price - buy_price
                 money += trade_profit
                 money_list.append(money)
